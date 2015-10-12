@@ -1,103 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:background="#ffffff"
     android:orientation="vertical"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fbutton_color_amethyst"
+    >
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_weight="10"
-        android:layout_height="0dp">
-        <LinearLayout
+        android:layout_height="0dp"
+        android:layout_weight="2">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:text="Question"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/question"
-                    android:layout_height="wrap_content"
-                    android:text="Question is loading......"
-                    android:layout_margin="20dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="20sp"
-                    android:textColor="#2196f3" />
-
-                <LinearLayout
-                    android:id="@+id/linear1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:layout_gravity="center_horizontal"></LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_gravity="right">
-
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
+            android:background="#ffffff"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:id="@+id/questionTV"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal"/>
     </ScrollView>
 
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="15dp"
-        android:layout_gravity="bottom"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:layout_height="0dp">
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/prev"
-            android:visibility="gone"
-            android:onClick="prev"
-            android:background="#ffffff"
-            android:src="@drawable/prev"/>
-        <info.hoang8f.widget.FButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="submit"
-            android:layout_margin="10dp"
-            android:onClick="send"
-            android:visibility="gone"
-            android:layout_weight="3"
-            android:id="@+id/submit"
-            android:layout_gravity="right"
-            android:textColor="#ffffff"
-            fbutton:buttonColor="@color/fbutton_color_turquoise"
-            fbutton:shadowColor="@color/fbutton_color_green_sea"
-            fbutton:shadowEnabled="true"
-            fbutton:shadowHeight="5dp"
-            fbutton:cornerRadius="5dp"
-        />
+        android:background="#ffffff"
+        android:divider="@color/fbutton_color_amethyst"
+        android:dividerHeight="1dp"
+        android:id="@+id/optionLV">
+    </ListView>
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/next"
-            android:visibility="gone"
-            android:onClick="next"
-            android:background="#ffffff"
-            android:src="@drawable/next"/>
-    </LinearLayout>
 
 </LinearLayout>
-
-
