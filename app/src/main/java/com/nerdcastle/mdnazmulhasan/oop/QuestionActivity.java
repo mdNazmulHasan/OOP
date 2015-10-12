@@ -2,6 +2,7 @@ package com.nerdcastle.mdnazmulhasan.oop;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import utils.AppController;
 
 public class QuestionActivity extends AppCompatActivity {
     ListView option;
@@ -64,6 +67,7 @@ public class QuestionActivity extends AppCompatActivity {
                         try {
                             questionFromJson = response.getString("Description");
                             question = (TextView) findViewById(R.id.questionTV);
+                            question.setVisibility(View.VISIBLE);
                             question.setText(questionFromJson);
                             answerArray = response.getJSONArray("AnswerList");
                             for(int i=0;i<answerArray.length();i++){
