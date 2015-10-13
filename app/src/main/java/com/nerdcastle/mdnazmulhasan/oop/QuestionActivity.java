@@ -1,8 +1,12 @@
 package com.nerdcastle.mdnazmulhasan.oop;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -76,6 +80,21 @@ public class QuestionActivity extends AppCompatActivity {
                             }
                             ArrayAdapter<String>optionAdapter= new ArrayAdapter<>(getApplicationContext(), R.layout.question_row, R.id.optinTV, optionList);
                             option.setAdapter(optionAdapter);
+                            option.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Fragment fr=new Result_Fragment();
+                                    Bundle data = new Bundle();
+                                    data.putString("data","ok");
+                                    fr.setArguments(data);
+                                    FragmentManager fm = getFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                                    fragmentTransaction.replace(R.id.questionFrame, fr);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                                    fragmentTransaction.commit();
+                                }
+                            });
 
                         } catch (JSONException e) {
 
