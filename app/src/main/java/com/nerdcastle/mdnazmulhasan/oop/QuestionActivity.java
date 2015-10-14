@@ -31,7 +31,7 @@ import utils.AppController;
 public class QuestionActivity extends AppCompatActivity {
     ListView option;
     ArrayList<String>optionList=new ArrayList<>();
-    int questionId = 2;
+    int questionId = 1;
     String questionFromJson;
     TextView question;
     JSONArray answerArray;
@@ -39,14 +39,28 @@ public class QuestionActivity extends AppCompatActivity {
     String userId;
     String questionNumber;
     int TotalQuestion;
+    Boolean next=false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question);
-        token = getIntent().getStringExtra("token");
-        userId = getIntent().getStringExtra("id");
-        questionNumber = getIntent().getStringExtra("questionNumber");
-        TotalQuestion = Integer.parseInt(questionNumber);
+        try{
+            token = getIntent().getStringExtra("token");
+            userId = getIntent().getStringExtra("id");
+            questionNumber = getIntent().getStringExtra("questionNumber");
+            TotalQuestion = Integer.parseInt(questionNumber);
+            next=getIntent().getBooleanExtra("next",false);
+
+        }catch (Exception e){
+
+        }
+
+        try{
+            questionId=getIntent().getIntExtra("questionNow",1);
+        }catch (Exception e){
+            questionId=2;
+        }
+
         option= (ListView) findViewById(R.id.optionLV);
         /*optionList.add("java");
         optionList.add("c");*/
@@ -86,6 +100,10 @@ public class QuestionActivity extends AppCompatActivity {
                                     Fragment fr=new Result_Fragment();
                                     Bundle data = new Bundle();
                                     data.putString("data","ok");
+                                    data.putString("token",token);
+                                    data.putString("id",userId);
+                                    data.putString("totalquestion",questionNumber);
+                                    data.putInt("questionId",questionId);
                                     fr.setArguments(data);
                                     FragmentManager fm = getFragmentManager();
                                     FragmentTransaction fragmentTransaction = fm.beginTransaction();
