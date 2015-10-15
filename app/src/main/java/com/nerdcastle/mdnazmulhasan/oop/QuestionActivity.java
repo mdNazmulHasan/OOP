@@ -31,14 +31,17 @@ import utils.AppController;
 public class QuestionActivity extends AppCompatActivity {
     ListView option;
     ArrayList<String>optionList=new ArrayList<>();
+    ArrayList<String>idList=new ArrayList<>();
     int questionId = 1;
+    int TotalQuestion;
     String questionFromJson;
     TextView question;
     JSONArray answerArray;
+    JSONObject correctAnswer;
     String token;
+    String correctAnswerId;
     String userId;
     String questionNumber;
-    int TotalQuestion;
     Boolean next=false;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -88,8 +91,11 @@ public class QuestionActivity extends AppCompatActivity {
                             question.setVisibility(View.VISIBLE);
                             question.setText(questionFromJson);
                             answerArray = response.getJSONArray("AnswerList");
+                            correctAnswer=response.getJSONObject("CorrectAnswer");
+                            correctAnswerId=correctAnswer.getString("Id");
                             for(int i=0;i<answerArray.length();i++){
                                 optionList.add(answerArray.getJSONObject(i).getString("Description"));
+                                idList.add(answerArray.getJSONObject(i).getString("Id"));
 
                             }
                             ArrayAdapter<String>optionAdapter= new ArrayAdapter<>(getApplicationContext(), R.layout.question_row, R.id.optinTV, optionList);
@@ -104,6 +110,8 @@ public class QuestionActivity extends AppCompatActivity {
                                     data.putString("id",userId);
                                     data.putString("totalquestion",questionNumber);
                                     data.putInt("questionId",questionId);
+                                    data.putString("correctAnswerId",correctAnswerId);
+                                    data.putString("optionId",idList.get(position));
                                     fr.setArguments(data);
                                     FragmentManager fm = getFragmentManager();
                                     FragmentTransaction fragmentTransaction = fm.beginTransaction();
