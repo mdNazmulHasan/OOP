@@ -30,8 +30,8 @@ import utils.AppController;
 
 public class QuestionActivity extends AppCompatActivity {
     ListView option;
-    ArrayList<String>optionList=new ArrayList<>();
-    ArrayList<String>idList=new ArrayList<>();
+    ArrayList<String> optionList = new ArrayList<>();
+    ArrayList<String> idList = new ArrayList<>();
     int questionId = 1;
     int TotalQuestion;
     String questionFromJson;
@@ -42,31 +42,29 @@ public class QuestionActivity extends AppCompatActivity {
     String correctAnswerId;
     String userId;
     String questionNumber;
-    Boolean next=false;
+    Boolean next = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question);
-        try{
+        try {
             token = getIntent().getStringExtra("token");
             userId = getIntent().getStringExtra("id");
             questionNumber = getIntent().getStringExtra("questionNumber");
             TotalQuestion = Integer.parseInt(questionNumber);
-            next=getIntent().getBooleanExtra("next",false);
+            next = getIntent().getBooleanExtra("next", false);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
-        try{
-            questionId=getIntent().getIntExtra("questionNow",1);
-        }catch (Exception e){
-            questionId=2;
+        try {
+            questionId = getIntent().getIntExtra("questionNow", 1);
+        } catch (Exception e) {
+            questionId = 2;
         }
 
-        option= (ListView) findViewById(R.id.optionLV);
-        /*optionList.add("java");
-        optionList.add("c");*/
+        option = (ListView) findViewById(R.id.optionLV);
 
         try {
             showService();
@@ -74,6 +72,7 @@ public class QuestionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void showService() throws JSONException {
         JSONObject dataForValidation = new JSONObject();
         dataForValidation.put("QuestionId", questionId);
@@ -91,27 +90,27 @@ public class QuestionActivity extends AppCompatActivity {
                             question.setVisibility(View.VISIBLE);
                             question.setText(questionFromJson);
                             answerArray = response.getJSONArray("AnswerList");
-                            correctAnswer=response.getJSONObject("CorrectAnswer");
-                            correctAnswerId=correctAnswer.getString("Id");
-                            for(int i=0;i<answerArray.length();i++){
+                            correctAnswer = response.getJSONObject("CorrectAnswer");
+                            correctAnswerId = correctAnswer.getString("Id");
+                            for (int i = 0; i < answerArray.length(); i++) {
                                 optionList.add(answerArray.getJSONObject(i).getString("Description"));
                                 idList.add(answerArray.getJSONObject(i).getString("Id"));
 
                             }
-                            ArrayAdapter<String>optionAdapter= new ArrayAdapter<>(getApplicationContext(), R.layout.question_row, R.id.optinTV, optionList);
+                            ArrayAdapter<String> optionAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.question_row, R.id.optinTV, optionList);
                             option.setAdapter(optionAdapter);
                             option.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Fragment fr=new Result_Fragment();
+                                    Fragment fr = new Result_Fragment();
                                     Bundle data = new Bundle();
-                                    data.putString("data","ok");
-                                    data.putString("token",token);
-                                    data.putString("id",userId);
-                                    data.putString("totalquestion",questionNumber);
-                                    data.putInt("questionId",questionId);
-                                    data.putString("correctAnswerId",correctAnswerId);
-                                    data.putString("optionId",idList.get(position));
+                                    data.putString("data", "ok");
+                                    data.putString("token", token);
+                                    data.putString("id", userId);
+                                    data.putString("totalquestion", questionNumber);
+                                    data.putInt("questionId", questionId);
+                                    data.putString("correctAnswerId", correctAnswerId);
+                                    data.putString("optionId", idList.get(position));
                                     fr.setArguments(data);
                                     FragmentManager fm = getFragmentManager();
                                     FragmentTransaction fragmentTransaction = fm.beginTransaction();
@@ -132,11 +131,10 @@ public class QuestionActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                if(error instanceof TimeoutError) {
+                if (error instanceof TimeoutError) {
                     String msg = "Request Timed Out, Pls try again";
                     Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-                }
-                else if(error instanceof NoConnectionError) {
+                } else if (error instanceof NoConnectionError) {
                     String msg = "No internet Access, Check your internet connection.";
                     Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
                 }

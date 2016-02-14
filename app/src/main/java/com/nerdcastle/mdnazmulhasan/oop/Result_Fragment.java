@@ -12,9 +12,6 @@ import android.widget.Toast;
 
 public class Result_Fragment extends Fragment {
     Button nxtBtn;
-    String token;
-    String userId;
-    String questionNumber;
     Boolean next=false;
     int questionId;
     String questionid;
@@ -57,7 +54,6 @@ public class Result_Fragment extends Fragment {
             }
         });
 
-        //Inflate the layout for this fragment
 
         return rootView;
     }

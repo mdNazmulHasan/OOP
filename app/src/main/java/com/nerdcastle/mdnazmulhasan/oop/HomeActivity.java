@@ -44,11 +44,11 @@ public class HomeActivity extends AppCompatActivity {
                     token=response.getString("Token");
                     questionNumber=response.getString("NoOfQuestion");
                     //Toast.makeText(getApplicationContext(),token,Toast.LENGTH_LONG).show();
-                    Intent i=new Intent(getApplicationContext(),QuestionActivity.class);
-                    i.putExtra("token",token);
-                    i.putExtra("questionNumber",questionNumber);
-                    i.putExtra("id",userId);
-                    startActivity(i);
+                    Intent questionIntent=new Intent(getApplicationContext(),QuestionActivity.class);
+                    questionIntent.putExtra("token", token);
+                    questionIntent.putExtra("questionNumber", questionNumber);
+                    questionIntent.putExtra("id", userId);
+                    startActivity(questionIntent);
                 } catch (JSONException e) {
                     //Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
                 }
